@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>Enable</Nullable>
+		<NoWarn>CS8767;NETSDK1023</NoWarn>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Version>1.0.0</Version>
+		<Company>MSB Studios</Company>
+		<Authors>MSB Studios</Authors>
+		<PackageTags>MVVM;.NET; WPF; UWP; Android</PackageTags>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+		<PackageIcon>Icon.png</PackageIcon>
+		<Description>MSB.Toolkit.Mvvm is a .NET MVVM library for cross-platform solutions such as Xamarin Forms, Android, Windows and macOS.</Description>
+		<PackageProjectUrl>https://github.com/MSB-Studios/MSB-Studios-Toolkit</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="Assets\Icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+</Project>
