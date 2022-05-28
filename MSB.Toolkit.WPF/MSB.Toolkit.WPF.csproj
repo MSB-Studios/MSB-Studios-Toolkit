@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<LangVersion>latest</LangVersion>
+		<Nullable>Enable</Nullable>
+		<NoWarn>CS8767;NETSDK1023</NoWarn>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Version>1.0.0</Version>
+		<Company>MSB Studios</Company>
+		<Authors>MSB Studios</Authors>
+		<PackageTags>Toolkit;.NET; WPF</PackageTags>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+		<PackageIcon>Icon.png</PackageIcon>
+		<Description>MSB.Toolkit.WPF is a .NET framework that makes it easy to create Windows Presentation Foundation desktop applications.</Description>
+		<PackageProjectUrl>https://github.com/MSB-Studios/MSB-Studios-Toolkit</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="Assets\Icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+</Project>
