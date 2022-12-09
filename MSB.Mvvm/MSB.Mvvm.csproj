@@ -1,0 +1,27 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<NoWarn>CS8767;NETSDK1023</NoWarn>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<Version>1.0.0</Version>
+		<Company>MSB Studios</Company>
+		<Authors>MSB Studios</Authors>
+		<PackageTags>Mvvm;.NET; WPF; UWP; Android</PackageTags>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<PackageIcon>Icon.png</PackageIcon>
+		<Description>MSB.Mvvm is a .NET library designed to provide cross-platform solutions.</Description>
+		<PackageProjectUrl>https://github.com/MSB-Studios/MSB-Studios-Toolkit</PackageProjectUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="Icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>
