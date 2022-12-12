@@ -6,20 +6,6 @@
     <ResourceDictionary.MergedDictionaries>
         <!--*** ICONS RESOURCES ***-->
         <ResourceDictionary >
-            <PathGeometry x:Key="Icons.UI.Chrome.Minimize">
-                M14 8v1H3V8h11z
-            </PathGeometry>
-            <PathGeometry x:Key="Icons.UI.Chrome.Maximize">
-                M3 3v10h10V3H3zm9 9H4V4h8v8z
-            </PathGeometry>
-            <PathGeometry x:Key="Icons.UI.Chrome.Restore">
-                M3 5v9h9V5H3zm8 8H4V6h7v7z
-                M5 5h1V4h7v7h-1v1h2V3H5v2z
-            </PathGeometry>
-            <PathGeometry x:Key="Icons.UI.Chrome.Close">
-                M7.116 8l-4.558 4.558.884.884L8 8.884l4.558 4.558.884-.884L8.884 8l4.558-4.558-.884-.884L8 7.116 3.442 2.558l-.884.884L7.116 8z
-            </PathGeometry>
-
             <PathGeometry x:Key="Icons.UI.Common.User">
                 M230.432,0c-65.829,0-119.641,53.812-119.641,119.641s53.812,119.641,119.641,119.641s119.641-53.812,119.641-119.641
 	            S296.261,0,230.432,0z
@@ -130,7 +116,36 @@
         </ResourceDictionary>
         <!--*** BRUSHES RESOURCES ***-->
         <ResourceDictionary >
+            <!--Default app accent color...-->
+            <Color x:Key="ApplicationAccentColor">#FF5182</Color>
+
+            <Color x:Key="ControlDisabledBackColor">Transparent</Color>
+            <Color x:Key="ControlDisabledForeColor">#FF9A9A9A</Color>
+
+            <SolidColorBrush x:Key="SystemControlTransparentBrush"
+                     Color="Transparent"/>
             
+            <SolidColorBrush x:Key="WindowChromeBackgroundBrush"
+                             Color="White"/>
+            <SolidColorBrush x:Key="WindowTitleBarBackgroundBrush"
+                             Color="White"/>
+
+            <SolidColorBrush x:Key="TitleBarButtonBackground"
+                             Color="Transparent"/>
+            <SolidColorBrush x:Key="TitleBarButtonForeground"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="TitleBarButtonBackgroundPointerOver"
+                             Color="#FFEDEDED"/>
+            <SolidColorBrush x:Key="TitleBarButtonForegroundPointerOver"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="TitleBarButtonBackgroundPressed"
+                             Color="#FFE9E9E9"/>
+            <SolidColorBrush x:Key="TitleBarButtonForegroundPressed"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="TitleBarButtonBackgroundDisabled"
+                             Color="{DynamicResource ControlDisabledBackColor}"/>
+            <SolidColorBrush x:Key="TitleBarButtonForegroundDisabled"
+                             Color="{DynamicResource ControlDisabledForeColor}"/>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
     
