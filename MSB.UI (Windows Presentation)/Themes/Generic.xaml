@@ -1,9 +1,12 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:MSB.UI.Controls"
     xmlns:ui="clr-namespace:MSB.UI">
     
     <!--#region 'ControlsResources'-->
+
+    <FontFamily x:Key="SymbolFontFamily">Segoe MDL2 Assets,/MSB.UI-WPF;component/Assets/#Segoe MDL2 Assets</FontFamily>
 
     <PathGeometry x:Key="Icons.UI.Chrome.Minimize">
         M14 8v1H3V8h11z
@@ -147,6 +150,41 @@
                             <Setter TargetName="TitlePresenter" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
+    
+    <!--#region 'MSB.UI.Controls.FontIcon'-->
+
+    <Style TargetType="controls:FontIcon">
+        <Setter Property="Foreground" Value="{DynamicResource IconElementForegroundBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:FontIcon">
+                    <TextBlock x:Name="PART_Glyph" Text="{TemplateBinding Glyph}" FontFamily="{StaticResource SymbolFontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--#endregion-->
+    
+    <!--#region 'MSB.UI.Controls.PathIcon'-->
+
+    <Style TargetType="controls:PathIcon">
+        <Setter Property="Foreground" Value="{DynamicResource IconElementForegroundBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PathIcon">
+                    <Viewbox Margin="{TemplateBinding Padding}">
+                        <Path x:Name="PART_Path" Data="{TemplateBinding Data}" Fill="{TemplateBinding Foreground}" Stretch="UniformToFill"/>
+                    </Viewbox>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
