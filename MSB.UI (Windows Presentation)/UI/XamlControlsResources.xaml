@@ -146,6 +146,9 @@
                              Color="{DynamicResource ControlDisabledBackColor}"/>
             <SolidColorBrush x:Key="TitleBarButtonForegroundDisabled"
                              Color="{DynamicResource ControlDisabledForeColor}"/>
+
+            <SolidColorBrush x:Key="IconElementForegroundBrush"
+                             Color="Black"/>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
     
