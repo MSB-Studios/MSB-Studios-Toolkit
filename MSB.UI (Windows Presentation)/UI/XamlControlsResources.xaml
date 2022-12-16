@@ -1,7 +1,13 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+    
+    <!-- Symbol font family resource-->
+    <FontFamily x:Key="SymbolFontFamily">pack://application:,,,/MSB.UI-WPF;component/Assets/#Segoe MDL2 Assets</FontFamily>
+    
+    <!--Default controls corner radius-->
+    <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
+    <CornerRadius x:Key="OverlayCornerRadius">8</CornerRadius>
 
     <ResourceDictionary.MergedDictionaries>
         <!--*** ICONS RESOURCES ***-->
@@ -123,8 +129,11 @@
             <Color x:Key="ControlDisabledForeColor">#FF9A9A9A</Color>
 
             <SolidColorBrush x:Key="SystemControlTransparentBrush"
-                     Color="Transparent"/>
-            
+                             Color="Transparent"/>
+
+            <SolidColorBrush x:Key="ApplicationAccentBrush"
+                             Color="{DynamicResource ApplicationAccentColor}"/>
+
             <SolidColorBrush x:Key="WindowChromeBackgroundBrush"
                              Color="White"/>
             <SolidColorBrush x:Key="WindowTitleBarBackgroundBrush"
@@ -156,6 +165,48 @@
                              Color="#FFE6E6E6"/>
             <SolidColorBrush x:Key="SplitViewLightDismissLayerBrush"
                              Color="#0C000000"/>
+
+            <SolidColorBrush x:Key="NavigationButtonBackground"
+                             Color="Transparent"/>
+            <SolidColorBrush x:Key="NavigationButtonForeground"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="NavigationButtonBackgroundPointerOver"
+                             Color="#21000000"/>
+            <SolidColorBrush x:Key="NavigationButtonForegroundPointerOver"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="NavigationButtonBackgroundPressed"
+                             Color="#11000000"/>
+            <SolidColorBrush x:Key="NavigationButtonForegroundPressed"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="NavigationButtonBackgroundDisabled"
+                             Color="{DynamicResource ControlDisabledBackColor}"/>
+            <SolidColorBrush x:Key="NavigationButtonForegroundDisabled"
+                             Color="{DynamicResource ControlDisabledForeColor}"/>
+
+            <SolidColorBrush x:Key="NavigationViewItemBackground"
+                             Color="Transparent"/>
+            <SolidColorBrush x:Key="NavigationViewItemForeground"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundPointerOver"
+                             Color="#21000000"/>
+            <SolidColorBrush x:Key="NavigationViewItemForegroundPointerOver"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundSelected"
+                             Color="#11000000"/>
+            <SolidColorBrush x:Key="NavigationViewItemForegroundSelected"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedUnfocused"
+                             Color="#11000000"/>
+            <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedUnfocused"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPointerOver"
+                             Color="#19000000"/>
+            <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedPointerOver"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundDisabled"
+                             Color="{DynamicResource ControlDisabledBackColor}"/>
+            <SolidColorBrush x:Key="NavigationViewItemForegroundDisabled"
+                             Color="{DynamicResource ControlDisabledForeColor}"/>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
     
