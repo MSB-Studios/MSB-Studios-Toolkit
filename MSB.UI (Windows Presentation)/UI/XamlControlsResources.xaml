@@ -149,6 +149,13 @@
 
             <SolidColorBrush x:Key="IconElementForegroundBrush"
                              Color="Black"/>
+
+            <SolidColorBrush x:Key="SplitViewBackgroundBrush"
+                             Color="White"/>
+            <SolidColorBrush x:Key="SplitViewPaneBackground"
+                             Color="#FFE6E6E6"/>
+            <SolidColorBrush x:Key="SplitViewLightDismissLayerBrush"
+                             Color="#0C000000"/>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
     
