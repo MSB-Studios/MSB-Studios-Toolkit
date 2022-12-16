@@ -6,8 +6,8 @@
 		<UseWPF>True</UseWPF>
 		<RootNamespace>MSB</RootNamespace>
 		<LangVersion>latest</LangVersion>
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-		<Version>1.0.0</Version>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Version>1.0.3</Version>
 		<Company>MSB Studios</Company>
 		<Authors>MSB Studios</Authors>
 		<PackageTags>Toolkit; Controls; .NET; WPF</PackageTags>

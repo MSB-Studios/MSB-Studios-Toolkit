@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSB.Mvvm", "MSB.Mvvm\MSB.Mvvm.csproj", "{669BA9C9-84FC-4979-825E-0C6880A0E8AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSB.Mvvm", "MSB.Mvvm\MSB.Mvvm.csproj", "{669BA9C9-84FC-4979-825E-0C6880A0E8AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSB.UI (Universal Windows)", "MSB.UI (Universal Windows)\MSB.UI (Universal Windows).csproj", "{C02FA384-E2E8-42D2-B528-8400FDF28692}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSB.UI (Universal Windows)", "MSB.UI (Universal Windows)\MSB.UI (Universal Windows).csproj", "{C02FA384-E2E8-42D2-B528-8400FDF28692}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSB.UI (Windows Presentation)", "MSB.UI (Windows Presentation)\MSB.UI (Windows Presentation).csproj", "{35DE2225-F142-4918-8168-5FB17AFE1871}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSB.UI (Windows Presentation)", "MSB.UI (Windows Presentation)\MSB.UI (Windows Presentation).csproj", "{35DE2225-F142-4918-8168-5FB17AFE1871}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
