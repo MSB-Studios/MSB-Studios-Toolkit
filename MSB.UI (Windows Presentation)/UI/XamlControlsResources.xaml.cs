@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Windows.Media;
+using System.Windows;
 
 namespace MSB.UI
 {
