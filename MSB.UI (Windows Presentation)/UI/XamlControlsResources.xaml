@@ -22,6 +22,50 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--#region 'System.Windows.Controls.Primitives.ButtonBase'-->
+    
+    <!--
+    This resource can be applied to any control that inherits from ButtonBase,
+    such as Button, RepeatButton, etc.
+    -->
+    <Style x:Key="AccentButtonStyle" TargetType="{x:Type ButtonBase}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                        <Grid x:Name="DarkeningMask">
+                            <ContentPresenter x:Name="Content" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPointerOver}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPointerOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPressed}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundDisabled}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
 
     <!--#region 'System.Windows.Controls.Button'-->
 
@@ -92,41 +136,12 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="AccentButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="10 0"/>
-        <Setter Property="MinHeight" Value="36"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
-                        <Grid x:Name="DarkeningMask">
-                            <ContentPresenter x:Name="Content" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Grid>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPointerOver}"/>
-                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPointerOver}"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPressed}"/>
-                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPressed}"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundDisabled}"/>
-                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundDisabled}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <!--Default '...Button' style, based on 'BaseButtonStyle' resource-->
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}"/>
+
+    <!--#endregion-->
+    
+    <!--#region 'System.Windows.Controls.RepeatButton'-->
 
     <Style x:Key="DefaultRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
@@ -161,9 +176,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--Default '...Button' style, based on 'BaseButtonStyle' resource-->
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}"/>
 
     <!--Default '...RepeatButton' style, based on 'BaseButtonStyle' resource-->
     <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource DefaultRepeatButtonStyle}"/>
