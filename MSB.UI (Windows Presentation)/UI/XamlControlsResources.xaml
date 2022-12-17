@@ -295,6 +295,10 @@
 
             <SolidColorBrush x:Key="WindowChromeBackgroundBrush"
                              Color="White"/>
+            <SolidColorBrush x:Key="WindowChromeBorderBrush"
+                             Color="{DynamicResource ApplicationAccentColor}"/>
+            <SolidColorBrush x:Key="WindowChromeBorderBrushInactive"
+                             Color="DimGray"/>
             <SolidColorBrush x:Key="WindowTitleBarBackgroundBrush"
                              Color="White"/>
 

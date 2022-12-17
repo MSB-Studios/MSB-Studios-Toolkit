@@ -168,6 +168,8 @@
 
     <Style TargetType="ui:ModernWindow">
         <Setter Property="Background" Value="{DynamicResource WindowChromeBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource WindowChromeBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome NonClientFrameEdges="None" CaptionHeight="0" />
@@ -213,7 +215,10 @@
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="MaxRest" Property="Content" Value="{StaticResource Icons.UI.Chrome.Restore}"/>
-                            <Setter TargetName="GridRoot" Property="Margin" Value="8"/>
+                            <Setter TargetName="GridRoot" Property="Margin" Value="6"/>
+                        </Trigger>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter Property="BorderBrush" Value="{DynamicResource WindowChromeBorderBrushInactive}"/>
                         </Trigger>
                         <Trigger Property="ExtendViewIntoTitleBar" Value="True">
                             <Setter TargetName="PART_TitleBar" Property="Background" Value="{x:Null}"/>
