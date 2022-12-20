@@ -277,6 +277,22 @@
 
     <!--#endregion-->
     
+    <!--#region 'MSB.UI.Controls.IconPresenter'-->
+
+    <Style TargetType="controls:IconPresenter">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Foreground" Value="{DynamicResource IconElementDefaultForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:IconPresenter">
+                    <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{TemplateBinding Icon}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
+    
     <!--#region 'MSB.UI.Controls.SplitView'-->
 
     <Style TargetType="controls:SplitView">
@@ -693,6 +709,179 @@
                             <Rectangle x:Name="HCPaneBorder" Fill="{DynamicResource SystemControlTransparentBrush}" HorizontalAlignment="Right" Visibility="Collapsed" Width="1"/>
                         </Grid>
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
+    
+    <!--#region 'MSB.UI.Controls.NavigationViewItem'-->
+
+    <Style TargetType="controls:NavigationViewItem">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultFocusVisualStyle}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource NavigationViewItemForeground}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="4 0"/>
+        <Setter Property="Margin" Value="4 2"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="IconPadding" Value="12"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:NavigationViewItem">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                        <Border.Resources>
+                            <Storyboard x:Key="NotchVisibleStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="NotchTransform" Storyboard.TargetProperty="ScaleY">
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="0.5"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="NotchCollapsedToVisibleStoryboard">
+                                <DoubleAnimation Storyboard.TargetName="NotchTransform" Storyboard.TargetProperty="ScaleY" To="0.5" Duration="0:0:0.5">
+                                    <DoubleAnimation.EasingFunction>
+                                        <BackEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Key="NotchVisibleToCollapsedStoryboard">
+                                <DoubleAnimation Storyboard.TargetName="NotchTransform" Storyboard.TargetProperty="ScaleY" To="0" Duration="0:0:0.5">
+                                    <DoubleAnimation.EasingFunction>
+                                        <BackEase EasingMode="EaseIn"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Key="IconVisibleStoryboard">
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="IconGrid" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Border.Resources>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="IconVisibilityStates">
+                                <VisualState x:Name="IconCollapsed"/>
+                                <VisualState x:Name="IconVisible" Storyboard="{StaticResource IconVisibleStoryboard}"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="NotchVisibilityStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="NotchCollapsed" To="NotchVisible"
+                                                      Storyboard="{StaticResource NotchCollapsedToVisibleStoryboard}"/>
+                                    <VisualTransition From="NotchVisible" To="NotchCollapsed"
+                                                      Storyboard="{StaticResource NotchVisibleToCollapsedStoryboard}"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="NotchCollapsed"/>
+                                <VisualState x:Name="NotchVisible"
+                                             Storyboard="{StaticResource NotchVisibleStoryboard}"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="10" Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid x:Name="IconGrid" Width="{Binding ActualHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}" Visibility="Collapsed">
+                                <Viewbox Margin="{TemplateBinding IconPadding}">
+                                    <controls:IconPresenter x:Name="IconPresenter" Icon="{TemplateBinding Icon}" Foreground="{TemplateBinding Foreground}"/>
+                                </Viewbox>
+                            </Grid>
+                            <Rectangle Fill="{DynamicResource ApplicationAccentBrush}" RadiusX="4" RadiusY="4" Width="4" HorizontalAlignment="Left" RenderTransformOrigin="0.5, 0.5">
+                                <Rectangle.RenderTransform>
+                                    <ScaleTransform x:Name="NotchTransform" ScaleY="0"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <ContentPresenter Grid.Column="1" x:Name="ContentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsSelected" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundPointerOver}"/>
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource NavigationViewItemForegroundPointerOver}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundPointerOver}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelectedUnfocused}"/>
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource NavigationViewItemForegroundSelectedUnfocused}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundSelectedUnfocused}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelected}"/>
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource NavigationViewItemForegroundSelected}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundSelected}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundSelectedPointerOver}"/>
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource NavigationViewItemForegroundSelectedPointerOver}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundSelectedPointerOver}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource NavigationViewItemBackgroundDisabled}"/>
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource NavigationViewItemForegroundDisabled}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource NavigationViewItemForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
+    
+    <!--#region 'MSB.UI.Controls.NavigationViewList'-->
+
+    <Style TargetType="controls:NavigationViewList">
+        <Setter Property="Background" Value="{DynamicResource SystemControlTransparentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemControlTransparentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="Padding" Value="-1 2"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:NavigationViewList">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="1" SnapsToDevicePixels="true">
+                        <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
