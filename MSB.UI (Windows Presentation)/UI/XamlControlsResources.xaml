@@ -22,6 +22,50 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--#region 'System.Windows.Controls.Primitives.ButtonBase'-->
+    
+    <!--
+    This resource can be applied to any control that inherits from ButtonBase,
+    such as Button, RepeatButton, etc.
+    -->
+    <Style x:Key="AccentButtonStyle" TargetType="{x:Type ButtonBase}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                        <Grid x:Name="DarkeningMask">
+                            <ContentPresenter x:Name="Content" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPointerOver}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPointerOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPressed}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundDisabled}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
 
     <!--#region 'System.Windows.Controls.Button'-->
 
@@ -92,41 +136,84 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="AccentButtonStyle" TargetType="{x:Type Button}">
+    <!--Default '...Button' style-->
+    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}"/>
+
+    <!--#endregion-->
+    
+    <!--#region 'System.Windows.Controls.ToggleButton'-->
+
+    <Style x:Key="DefaultToggleButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="10 0"/>
         <Setter Property="MinHeight" Value="36"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
                         <Grid x:Name="DarkeningMask">
                             <ContentPresenter x:Name="Content" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPointerOver}"/>
-                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPointerOver}"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPressed}"/>
-                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPressed}"/>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="False"/>
+                                <Condition Property="IsPressed" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ApplicationAccentBrush}"/>
+                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True"/>
+                                <Condition Property="IsPressed" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ApplicationAccentBrush}"/>
+                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ApplicationAccentBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundDisabled}"/>
-                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundDisabled}"/>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--Default '...ToggleButton' style-->
+    <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource DefaultToggleButtonStyle}"/>
+
+    <!--#endregion-->
+    
+    <!--#region 'System.Windows.Controls.Primitives.RepeatButton'-->
 
     <Style x:Key="DefaultRepeatButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
@@ -162,11 +249,231 @@
         </Setter>
     </Style>
 
-    <!--Default '...Button' style, based on 'BaseButtonStyle' resource-->
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource DefaultButtonStyle}"/>
-
-    <!--Default '...RepeatButton' style, based on 'BaseButtonStyle' resource-->
+    <!--Default '...RepeatButton' style-->
     <Style TargetType="{x:Type RepeatButton}" BasedOn="{StaticResource DefaultRepeatButtonStyle}"/>
+
+    <!--#endregion-->
+    
+    <!--#region 'System.Windows.Controls.TextBox'-->
+
+    <Style x:Key="DefaultTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
+        <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource TextBoxBackgroundPointerOver}"/>
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrushPointerOver}"/>
+                            <Setter TargetName="PART_ContentHost" Property="Foreground" Value="{DynamicResource TextBoxForegroundPointerOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource TextBoxBackgroundFocused}"/>
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrushFocused}"/>
+                            <Setter TargetName="PART_ContentHost" Property="BorderBrush" Value="{DynamicResource TextBoxForegroundFocused}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource TextBoxBackgroundDisabled}"/>
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrushDisabled}"/>
+                            <Setter TargetName="PART_ContentHost" Property="BorderBrush" Value="{DynamicResource TextBoxForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Default '...TextBox' style-->
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource DefaultTextBoxStyle}"/>
+
+    <!--#endregion-->
+    
+    <!--#region 'System.Windows.Controls.PasswordBox'-->
+
+    <Style x:Key="DefaultPasswordBoxStyle" TargetType="{x:Type PasswordBox}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
+        <Setter Property="PasswordChar" Value="●"/>
+        <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource TextBoxBackgroundPointerOver}"/>
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrushPointerOver}"/>
+                            <Setter TargetName="PART_ContentHost" Property="Foreground" Value="{DynamicResource TextBoxForegroundPointerOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource TextBoxBackgroundFocused}"/>
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrushFocused}"/>
+                            <Setter TargetName="PART_ContentHost" Property="BorderBrush" Value="{DynamicResource TextBoxForegroundFocused}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource TextBoxBackgroundDisabled}"/>
+                            <Setter TargetName="LayoutRoot" Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrushDisabled}"/>
+                            <Setter TargetName="PART_ContentHost" Property="BorderBrush" Value="{DynamicResource TextBoxForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Default '...PasswordBox' style-->
+    <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource DefaultPasswordBoxStyle}"/>
+
+    <!--#endregion-->
+
+    <!--#region 'System.Windows.Controls.ListBoxItem'-->
+
+    <Style x:Key="DefaultListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultFocusVisualStyle}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{DynamicResource ListBoxItemBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ListBoxItemForeground}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                        <Grid x:Name="DarkeningMask">
+                            <ContentPresenter x:Name="ContentPresenter" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsSelected" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ListBoxItemBackgroundPointerOver}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ListBoxItemForegroundPointerOver}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ListBoxItemBackgroundSelected}"/>
+                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource ListBoxItemBackgroundSelectedUnfocused}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ListBoxItemForegroundSelectedUnfocused}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ListBoxItemBackgroundSelected}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ListBoxItemForegroundSelected}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ListBoxItemBackgroundSelected}"/>
+                            <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource ListBoxItemBackgroundSelectedPointerOver}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ListBoxItemForegroundSelectedPointerOver}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ListBoxItemBackgroundDisabled}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ListBoxForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Default '...ListBoxItem' style-->
+    <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource DefaultListBoxItemStyle}"/>
+
+    <!--#endregion-->
+
+    <!--#region 'System.Windows.Controls.ListBox'-->
+
+    <Style x:Key="DefaultListBoxStyle" TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="{DynamicResource SystemControlTransparentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemControlTransparentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="Padding" Value="4"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="1" SnapsToDevicePixels="true">
+                        <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Default '...ListBox' style-->
+    <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource DefaultListBoxStyle}"/>
 
     <!--#endregion-->
 
@@ -302,6 +609,9 @@
             <SolidColorBrush x:Key="WindowTitleBarBackgroundBrush"
                              Color="White"/>
 
+            <SolidColorBrush x:Key="ApplicationPageBackgroundBrush"
+                             Color="White"/>
+
             <SolidColorBrush x:Key="TitleBarButtonBackground"
                              Color="Transparent"/>
             <SolidColorBrush x:Key="TitleBarButtonForeground"
@@ -403,6 +713,56 @@
             <SolidColorBrush x:Key="AccentButtonBackgroundDisabled"
                              Color="{DynamicResource ControlDisabledBackColor}"/>
             <SolidColorBrush x:Key="AccentButtonForegroundDisabled"
+                             Color="{DynamicResource ControlDisabledForeColor}"/>
+
+            <SolidColorBrush x:Key="TextBoxBackground"
+                             Color="Transparent"/>
+            <SolidColorBrush x:Key="TextBoxBorderBrush"
+                             Color="#FFC8C8C8"/>
+            <SolidColorBrush x:Key="TextBoxForeground"
+                             Color="#FF323232"/>
+            <SolidColorBrush x:Key="TextBoxBackgroundPointerOver"
+                             Color="Transparent"/>
+            <SolidColorBrush x:Key="TextBoxBorderBrushPointerOver"
+                             Color="{DynamicResource ApplicationAccentColor}"/>
+            <SolidColorBrush x:Key="TextBoxForegroundPointerOver"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="TextBoxBackgroundFocused"
+                             Color="Transparent"/>
+            <SolidColorBrush x:Key="TextBoxBorderBrushFocused"
+                             Color="{DynamicResource ApplicationAccentColor}"/>
+            <SolidColorBrush x:Key="TextBoxForegroundFocused"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="TextBoxBackgroundDisabled"
+                             Color="{DynamicResource ControlDisabledBackColor}"/>
+            <SolidColorBrush x:Key="TextBoxBorderBrushDisabled"
+                             Color="#FFE1E1E1"/>
+            <SolidColorBrush x:Key="TextBoxForegroundDisabled"
+                             Color="{DynamicResource ControlDisabledForeColor}"/>
+
+            <SolidColorBrush x:Key="ListBoxItemBackground"
+                             Color="Transparent"/>
+            <SolidColorBrush x:Key="ListBoxItemForeground"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="ListBoxItemBackgroundPointerOver"
+                             Color="#21000000"/>
+            <SolidColorBrush x:Key="ListBoxItemForegroundPointerOver"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="ListBoxItemBackgroundSelected"
+                             Color="{DynamicResource ApplicationAccentColor}"/>
+            <SolidColorBrush x:Key="ListBoxItemForegroundSelected"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="ListBoxItemBackgroundSelectedUnfocused"
+                             Color="#11000000"/>
+            <SolidColorBrush x:Key="ListBoxItemForegroundSelectedUnfocused"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="ListBoxItemBackgroundSelectedPointerOver"
+                             Color="#19000000"/>
+            <SolidColorBrush x:Key="ListBoxItemForegroundSelectedPointerOver"
+                             Color="Black"/>
+            <SolidColorBrush x:Key="ListBoxItemBackgroundDisabled"
+                             Color="{DynamicResource ControlDisabledBackColor}"/>
+            <SolidColorBrush x:Key="ListBoxItemForegroundDisabled"
                              Color="{DynamicResource ControlDisabledForeColor}"/>
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
