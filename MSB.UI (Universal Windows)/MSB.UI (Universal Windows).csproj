@@ -1,8 +1,8 @@
 <Project Sdk="MSBuild.Sdk.Extras">
 
 	<PropertyGroup>
-		<TargetFramework>uap10.0.17763</TargetFramework>
-		<TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+		<TargetFramework>uap10.0.18362</TargetFramework>
+		<TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
 		<NoWarn>CS8767;NETSDK1023</NoWarn>
 		<RootNamespace>MSB</RootNamespace>
 		<LangVersion>latest</LangVersion>
