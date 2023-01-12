@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
 	<PropertyGroup>
-		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<TargetFramework>net6.0-windows</TargetFramework>
 		<NoWarn>CS8767;NETSDK1023</NoWarn>
 		<UseWPF>True</UseWPF>
 		<RootNamespace>MSB</RootNamespace>
