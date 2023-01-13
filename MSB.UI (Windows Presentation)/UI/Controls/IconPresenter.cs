@@ -1,12 +1,14 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+using System.Windows.Markup;
 
 namespace MSB.UI.Controls
 {
     /// <summary>
     /// 
     /// </summary>
+    [ContentProperty(nameof(Icon))]
     public sealed class IconPresenter : Control
     {
         /// <summary>
