@@ -140,6 +140,49 @@
     
     <!--#region 'System.Windows.Controls.ToggleButton'-->
 
+    <Style x:Key="ComboBoxToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="26"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter x:Name="Content" Grid.Column="0" Focusable="False" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Path x:Name="Glyph" Grid.Column="1" Width="10" Height="10" StrokeThickness="1.5" Stretch="Uniform" HorizontalAlignment="Center" Stroke="{DynamicResource ComboBoxGlyphBrush}" Data="M 1,1 L 9,9 L 18,1 "/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxToggleButtonBackgroundPointerOver}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxToggleButtonForegroundPointerOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxToggleButtonBackgroundPressed}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxToggleButtonForegroundPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxToggleButtonBackgroundChecked}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxToggleButtonForegroundChecked}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxBackgroundDisabled}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxForegroundDisabled}"/>
+                            <Setter TargetName="Glyph" Property="Stroke" Value="{DynamicResource ComboBoxForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="DefaultToggleButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
         <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
@@ -252,6 +295,54 @@
     <!--#endregion-->
     
     <!--#region 'System.Windows.Controls.TextBox'-->
+
+    <Style x:Key="ComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
+        <Setter Property="Background" Value="{DynamicResource ComboBoxTextBoxBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ComboBoxTextBoxForeground}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxTextBoxBackgroundPointerOver}"/>
+                            <Setter TargetName="PART_ContentHost" Property="Foreground" Value="{DynamicResource ComboBoxTextBoxForegroundPointerOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxTextBoxBackgroundFocused}"/>
+                            <Setter TargetName="PART_ContentHost" Property="Foreground" Value="{DynamicResource ComboBoxTextBoxForegroundFocused}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxBackgroundDisabled}"/>
+                            <Setter TargetName="PART_ContentHost" Property="Foreground" Value="{DynamicResource ComboBoxForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
 
     <Style x:Key="DefaultTextBoxStyle" TargetType="{x:Type TextBox}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
@@ -471,6 +562,155 @@
 
     <!--Default '...ListBox' style-->
     <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource DefaultListBoxStyle}"/>
+
+    <!--#endregion-->
+    
+    <!--#region 'System.Windows.Controls.ComboBoxItem'-->
+
+    <Style x:Key="DefaultComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Padding" Value="10, 0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{DynamicResource ComboBoxItemBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ComboBoxItemForeground}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="ContentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsSelected" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundPointerOver}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxItemForegroundPointerOver}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundSelectedUnfocused}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxItemForegroundSelectedUnfocused}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundSelected}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxItemForegroundSelected}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundSelectedPointerOver}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxItemForegroundSelectedPointerOver}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ComboBoxItemBackgroundDisabled}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ComboBoxItemForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--Default '...ComboBoxItem' style-->
+    <Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource DefaultComboBoxItemStyle}"/>
+
+    <!--#endregion-->
+    
+    <!--#region 'Syste.Windows.Controls.ComboBox'-->
+
+    <ControlTemplate x:Key="EditableComboBoxTemplate" TargetType="{x:Type ComboBox}">
+        <Grid x:Name="Root" SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="PART_EditableTextBox" Grid.Column="0" Text="{TemplateBinding Text}" BorderBrush="{TemplateBinding BorderBrush}" Style="{StaticResource ComboBoxTextBoxStyle}"
+                     IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" Background="White">
+                <TextBox.Resources>
+                    <CornerRadius x:Key="ControlCornerRadius">4, 0, 0, 4</CornerRadius>
+                </TextBox.Resources>
+            </TextBox>
+            <ToggleButton x:Name="PART_ToggleButton" Grid.Column="1" Width="26" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0, 1, 1, 1" Style="{StaticResource ComboBoxToggleButtonStyle}"
+                          IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                <ToggleButton.Resources>
+                    <CornerRadius x:Key="ControlCornerRadius">0, 4, 4, 0</CornerRadius>
+                </ToggleButton.Resources>
+            </ToggleButton>
+            <Popup x:Name="PART_Popup" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Placement="Bottom" AllowsTransparency="True"
+                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                <Border x:Name="dropDownBorder" Background="White" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Margin="5, 0, 5, 5" CornerRadius="{StaticResource ControlCornerRadius}"
+                            MinWidth="{Binding ActualWidth, ElementName=Root}" MinHeight="30" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" ShadowDepth="3" BlurRadius="6" Direction="270" Opacity="0.15"/>
+                    </Border.Effect>
+                    <ScrollViewer x:Name="DropDownScrollViwer" Padding="5">
+                        <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="PART_EditableTextBox" Property="Foreground" Value="{DynamicResource ComboBoxForegroundDisabled}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="DefaultComboBoxTemplate" TargetType="{x:Type ComboBox}">
+        <Grid x:Name="Root" SnapsToDevicePixels="True">
+            <ToggleButton x:Name="PART_ToggleButton" Content="{TemplateBinding Text}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}" Style="{StaticResource ComboBoxToggleButtonStyle}"
+                          IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+            <Popup x:Name="PART_Popup" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Placement="Bottom" AllowsTransparency="True"
+                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                <Border x:Name="dropDownBorder" Background="White" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Margin="5, 0, 5, 5" CornerRadius="{StaticResource ControlCornerRadius}"
+                            MinWidth="{Binding ActualWidth, ElementName=Root}" MinHeight="30" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" ShadowDepth="3" BlurRadius="6" Direction="270" Opacity="0.15"/>
+                    </Border.Effect>
+                    <ScrollViewer x:Name="DropDownScrollViwer" Padding="5">
+                        <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </ScrollViewer>
+                </Border>
+            </Popup>
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="DefaultComboBoxStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="Background" Value="{DynamicResource ComboBoxBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ComboBoxForeground}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template" Value="{DynamicResource DefaultComboBoxTemplate}"/>
+        <Style.Triggers>
+            <Trigger Property="IsEditable" Value="True">
+                <Setter Property="Template" Value="{DynamicResource EditableComboBoxTemplate}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!--Default '...ComboBox' style-->
+    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource DefaultComboBoxStyle}"/>
 
     <!--#endregion-->
 
@@ -758,6 +998,70 @@
     <SolidColorBrush x:Key="ListBoxItemBackgroundDisabled"
                      Color="{DynamicResource ControlDisabledBackColor}"/>
     <SolidColorBrush x:Key="ListBoxItemForegroundDisabled"
+                     Color="{DynamicResource ControlDisabledForeColor}"/>
+
+    <SolidColorBrush x:Key="ComboBoxGlyphBrush"
+                     Color="#FF606060"/>
+    <SolidColorBrush x:Key="ComboBoxBackground"
+                     Color="#0A000000"/>
+    <SolidColorBrush x:Key="ComboBoxBorderBrush"
+                     Color="#FF969696"/>
+    <SolidColorBrush x:Key="ComboBoxForeground"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBackgroundPointerOver"
+                     Color="#21000000"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonForegroundPointerOver"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBackgroundPressed"
+                     Color="#11000000"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonForegroundPressed"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonBackgroundChecked"
+                     Color="#19000000"/>
+    <SolidColorBrush x:Key="ComboBoxToggleButtonForegroundChecked"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxTextBoxBackground"
+                     Color="White"/>
+    <SolidColorBrush x:Key="ComboBoxTextBoxForeground"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxTextBoxBackgroundPointerOver"
+                     Color="White"/>
+    <SolidColorBrush x:Key="ComboBoxTextBoxForegroundPointerOver"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxTextBoxBackgroundFocused"
+                     Color="White"/>
+    <SolidColorBrush x:Key="ComboBoxTextBoxForegroundFocused"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxBackgroundDisabled"
+                     Color="{DynamicResource ControlDisabledBackColor}"/>
+    <SolidColorBrush x:Key="ComboBoxBorderBrushDisabled"
+                     Color="#FFE1E1E1"/>
+    <SolidColorBrush x:Key="ComboBoxForegroundDisabled"
+                     Color="{DynamicResource ControlDisabledForeColor}"/>
+
+    <SolidColorBrush x:Key="ComboBoxItemBackground"
+                     Color="Transparent"/>
+    <SolidColorBrush x:Key="ComboBoxItemForeground"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundPointerOver"
+                     Color="#21000000"/>
+    <SolidColorBrush x:Key="ComboBoxItemForegroundPointerOver"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected"
+                     Color="#11000000"/>
+    <SolidColorBrush x:Key="ComboBoxItemForegroundSelected"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundSelectedUnfocused"
+                     Color="#11000000"/>
+    <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedUnfocused"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundSelectedPointerOver"
+                     Color="#19000000"/>
+    <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedPointerOver"
+                     Color="Black"/>
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundDisabled"
+                     Color="{DynamicResource ControlDisabledBackColor}"/>
+    <SolidColorBrush x:Key="ComboBoxItemForegroundDisabled"
                      Color="{DynamicResource ControlDisabledForeColor}"/>
 
 </ResourceDictionary>
