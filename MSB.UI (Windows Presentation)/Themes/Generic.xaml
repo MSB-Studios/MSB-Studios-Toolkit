@@ -167,7 +167,7 @@
     <!--#region 'MSB.UI.ModernWindow'-->
 
     <Style TargetType="ui:ModernWindow">
-        <Setter Property="Background" Value="{DynamicResource WindowChromeBackgroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource WindowChromeBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource WindowChromeBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="WindowChrome.WindowChrome">
@@ -185,7 +185,7 @@
                                 <RowDefinition Height="32"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Grid x:Name="PART_TitleBar" Grid.Row="0" Panel.ZIndex="1" Background="{DynamicResource WindowTitleBarBackgroundBrush}" WindowChrome.IsHitTestVisibleInChrome="True">
+                            <Grid x:Name="PART_TitleBar" Grid.Row="0" Panel.ZIndex="1" Background="{DynamicResource WindowTitleBarBackground}" WindowChrome.IsHitTestVisibleInChrome="True">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
@@ -245,7 +245,7 @@
     <!--#region 'MSB.UI.Controls.FontIcon'-->
 
     <Style TargetType="controls:FontIcon">
-        <Setter Property="Foreground" Value="{DynamicResource IconElementForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource IconElementForeground}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="12"/>
@@ -263,7 +263,7 @@
     <!--#region 'MSB.UI.Controls.PathIcon'-->
 
     <Style TargetType="controls:PathIcon">
-        <Setter Property="Foreground" Value="{DynamicResource IconElementForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource IconElementForeground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PathIcon">
@@ -281,7 +281,7 @@
 
     <Style TargetType="controls:IconPresenter">
         <Setter Property="Focusable" Value="False"/>
-        <Setter Property="Foreground" Value="{DynamicResource IconElementDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource IconElementForeground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:IconPresenter">
@@ -639,7 +639,7 @@
 
                             <Storyboard x:Key="OverlayVisibleStoryboard">
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LightDismissLayer" Storyboard.TargetProperty="Fill">
-                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource SplitViewLightDismissLayerBrush}"/>
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource LightDismissLayerBrush}"/>
                                 </ObjectAnimationUsingKeyFrames>
                             </Storyboard>
                             <!--#endregion-->
