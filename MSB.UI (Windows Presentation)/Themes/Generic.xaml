@@ -167,7 +167,7 @@
     <!--#region 'MSB.UI.ModernWindow'-->
 
     <Style TargetType="ui:ModernWindow">
-        <Setter Property="Background" Value="{DynamicResource WindowChromeBackgroundBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource WindowChromeBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource WindowChromeBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="WindowChrome.WindowChrome">
@@ -185,7 +185,7 @@
                                 <RowDefinition Height="32"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Grid x:Name="PART_TitleBar" Grid.Row="0" Panel.ZIndex="1" Background="{DynamicResource WindowTitleBarBackgroundBrush}" WindowChrome.IsHitTestVisibleInChrome="True">
+                            <Grid x:Name="PART_TitleBar" Grid.Row="0" Panel.ZIndex="1" Background="{DynamicResource WindowTitleBarBackground}" WindowChrome.IsHitTestVisibleInChrome="True">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
@@ -245,7 +245,7 @@
     <!--#region 'MSB.UI.Controls.FontIcon'-->
 
     <Style TargetType="controls:FontIcon">
-        <Setter Property="Foreground" Value="{DynamicResource IconElementForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource IconElementForeground}"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="12"/>
@@ -263,7 +263,7 @@
     <!--#region 'MSB.UI.Controls.PathIcon'-->
 
     <Style TargetType="controls:PathIcon">
-        <Setter Property="Foreground" Value="{DynamicResource IconElementForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource IconElementForeground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PathIcon">
@@ -281,7 +281,7 @@
 
     <Style TargetType="controls:IconPresenter">
         <Setter Property="Focusable" Value="False"/>
-        <Setter Property="Foreground" Value="{DynamicResource IconElementDefaultForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource IconElementForeground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:IconPresenter">
@@ -639,7 +639,7 @@
 
                             <Storyboard x:Key="OverlayVisibleStoryboard">
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LightDismissLayer" Storyboard.TargetProperty="Fill">
-                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource SplitViewLightDismissLayerBrush}"/>
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource LightDismissLayerBrush}"/>
                                 </ObjectAnimationUsingKeyFrames>
                             </Storyboard>
                             <!--#endregion-->
@@ -1021,6 +1021,60 @@
                         </MultiTrigger>
                         <Trigger Property="IsPaneOpen" Value="True">
                             <Setter TargetName="PaneGrid" Property="Width" Value="{Binding OpenPaneLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--#endregion-->
+    
+    <!--#region 'MSB.UI.Controls.AppBarButton'-->
+
+    <Style TargetType="controls:AppBarButton">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="MinHeight" Value="36"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:AppBarButton">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <controls:IconPresenter Grid.Row="0" x:Name="IconPresenter" Icon="{TemplateBinding Icon}" Margin="{TemplateBinding IconPadding}" Foreground="{TemplateBinding Foreground}"/>
+                            <ContentPresenter Grid.Row="1" x:Name="Content" Focusable="False" Content="{TemplateBinding Label}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
+                            <Setter TargetName="IconPresenter" Property="Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
+                        </Trigger>
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Label" Value="">
+                            <Setter TargetName="Content" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
