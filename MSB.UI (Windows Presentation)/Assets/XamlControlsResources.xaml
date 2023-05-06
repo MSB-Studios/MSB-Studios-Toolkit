@@ -711,7 +711,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="{DynamicResource ComboBoxItemBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource ComboBoxItemForeground}"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisual}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
         <Setter Property="MinHeight" Value="36"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -833,7 +833,7 @@
     </ControlTemplate>
 
     <Style x:Key="DefaultComboBoxStyle" TargetType="{x:Type ComboBox}">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisual}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
         <Setter Property="Background" Value="{DynamicResource ComboBoxBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ComboBoxBorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource ComboBoxForeground}"/>
@@ -1290,5 +1290,10 @@
                      Color="#FF959595"/>
     <SolidColorBrush x:Key="ScrollBarForegroundDragging"
                      Color="#FFD1D1D1"/>
+
+    <SolidColorBrush x:Key="MessageDialogBackground"
+                     Color="Transparent"/>
+    <SolidColorBrush x:Key="MessageDialogForeground"
+                     Color="Black"/>
 
 </ResourceDictionary>
