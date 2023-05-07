@@ -9,7 +9,7 @@ namespace MSB.UI.Controls.Primitives
     {
         internal NavigationViewTemplateSettings(NavigationView nav)
         {
-            this._owner = nav;
+            this.owner = nav;
         }
 
         #region Properties
@@ -68,14 +68,16 @@ namespace MSB.UI.Controls.Primitives
 
         internal void Update()
         {
-            if (this._owner.DisplayMode == NavigationViewDisplayMode.Minimal && !this._owner.IsPaneOpen)
+            if (this.owner.DisplayMode == NavigationViewDisplayMode.Minimal && !this.owner.IsPaneOpen)
                 SetValue(LeftPaneVisibilityProperty, Visibility.Collapsed);
             else
                 SetValue(LeftPaneVisibilityProperty, Visibility.Visible);
+
+            SetValue(BackButtonVisibilityProperty, this.owner.IsBackButtonVisible ? Visibility.Visible : Visibility.Collapsed);
         }
 
         #endregion
 
-        readonly NavigationView _owner;
+        readonly NavigationView owner;
     }
 }

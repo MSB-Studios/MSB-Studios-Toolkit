@@ -162,6 +162,74 @@
         </Setter>
     </Style>
 
+    <Style x:Key="MessageDialogButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource DefaultFocusVisualStyle}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="MinWidth" Value="125"/>
+        <Setter Property="Height" Value="36"/>
+        <Style.Triggers>
+            <Trigger Property="IsDefault" Value="False">
+                <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                                <ContentPresenter x:Name="Content" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+                                    <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                                    <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}"/>
+                                    <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsDefault" Value="True">
+                <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}"/>
+                <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ButtonBase}">
+                            <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                                <Grid x:Name="DarkeningMask">
+                                    <ContentPresenter x:Name="Content" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPointerOver}"/>
+                                    <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPointerOver}"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPressed}"/>
+                                    <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPressed}"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="DarkeningMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundDisabled}"/>
+                                    <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundDisabled}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <!--#endregion-->
     
     <!--#region 'MSB.UI.ModernWindow'-->
@@ -233,6 +301,52 @@
                         </Trigger>
                         <Trigger Property="IsTitleVisible" Value="False">
                             <Setter TargetName="TitlePresenter" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--#endregion-->
+
+    <!--#region 'MSB.UI.DialogWindow'-->
+
+    <Style TargetType="ui:DialogWindow">
+        <Setter Property="Background" Value="{DynamicResource WindowChromeBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource WindowChromeBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="ShowInTaskbar" Value="False"/>
+        <Setter Property="MinWidth" Value="500px"/>
+        <Setter Property="MinHeight" Value="200px"/>
+        <Setter Property="Width" Value="0px"/>
+        <Setter Property="Height" Value="0px"/>
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome NonClientFrameEdges="None" CaptionHeight="0" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ui:DialogWindow">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="GridRoot">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="PART_TitleBar" Grid.Row="0" Panel.ZIndex="1" WindowChrome.IsHitTestVisibleInChrome="True">
+                                <Rectangle x:Name="TitleBarRect" Fill="{DynamicResource SystemControlTransparentBrush}" MinWidth="30"/>
+                            </Grid>
+                            <Border Grid.Row="0" Grid.RowSpan="2" x:Name="PART_Content" Panel.ZIndex="0" Background="{TemplateBinding Background}">
+                                <ContentPresenter Grid.Row="1" x:Name="ContentPresenter" Content="{TemplateBinding Content}"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter Property="BorderBrush" Value="{DynamicResource WindowChromeBorderBrushInactive}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -902,8 +1016,6 @@
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <Border.Resources>
                             <Storyboard x:Key="CompactStoryboard">
-                                <animations:GridLengthAnimation BeginTime="0:0:0" Storyboard.TargetName="EmptyRowDefinition" Storyboard.TargetProperty="Height"
-                                                                To="0"/>
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SplitView" Storyboard.TargetProperty="DisplayMode">
                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static controls:SplitViewDisplayMode.CompactOverlay}"/>
                                 </ObjectAnimationUsingKeyFrames>
@@ -918,8 +1030,6 @@
                                 </ThicknessAnimationUsingKeyFrames>
                             </Storyboard>
                             <Storyboard x:Key="ExpandedStoryboard">
-                                <animations:GridLengthAnimation BeginTime="0:0:0" Storyboard.TargetName="EmptyRowDefinition" Storyboard.TargetProperty="Height"
-                                                                To="0"/>
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SplitView" Storyboard.TargetProperty="DisplayMode">
                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static controls:SplitViewDisplayMode.CompactInline}"/>
                                 </ObjectAnimationUsingKeyFrames>
@@ -946,49 +1056,44 @@
                         </VisualStateManager.VisualStateGroups>
 
                         <Grid >
-                            <controls:SplitView x:Name="SplitView" Background="{TemplateBinding Background}" CompactPaneLength="{TemplateBinding CompactPaneLength}" OpenPaneLength="{TemplateBinding OpenPaneLength}" IsPaneOpen="{Binding IsPaneOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+                            <Grid x:Name="NavButtonsGrid" VerticalAlignment="Top" Panel.ZIndex="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Rectangle Grid.ColumnSpan="2" x:Name="TitleBarDrawableRectangle" VerticalAlignment="Top" MinHeight="32" Fill="{DynamicResource SystemControlTransparentBrush}" Visibility="Collapsed"/>
+                                <StackPanel x:Name="ButtonsPanel" Orientation="Horizontal">
+                                    <Button x:Name="BackButton" Style="{StaticResource NavigationBackButtonStyle}" Visibility="{Binding TemplateSettings.BackButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}" IsEnabled="{TemplateBinding IsBackButtonEnabled}"/>
+                                    <Button x:Name="PaneToggleButton" Style="{StaticResource PaneToggleButtonStyle}"/>
+                                </StackPanel>
+                            </Grid>
+                            <controls:SplitView x:Name="SplitView" Panel.ZIndex="0" Background="{TemplateBinding Background}" CompactPaneLength="{TemplateBinding CompactPaneLength}" OpenPaneLength="{TemplateBinding OpenPaneLength}" IsPaneOpen="{Binding IsPaneOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
                                 <controls:SplitView.Pane>
                                     <Grid x:Name="PaneGrid" HorizontalAlignment="Left" Width="{TemplateBinding CompactPaneLength}">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="{Binding ActualHeight, ElementName=ButtonsPanel, Converter={StaticResource DoubleToGridLengthConverter}}"/>
+                                            <RowDefinition MinHeight="48" Height="{Binding ActualHeight, ElementName=ButtonsPanel, Converter={StaticResource DoubleToGridLengthConverter}}"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <ContentPresenter x:Name="PaneHeaderPresenter" Grid.Row="1" Height="48" MaxHeight="48" VerticalAlignment="Bottom" Content="{TemplateBinding PaneHeader}"/>
-                                        <ContentPresenter Grid.Row="2" Content="{TemplateBinding PaneCustomContent}"/>
-                                        <controls:NavigationViewList x:Name="MenuItems" Grid.Row="3" ItemsSource="{TemplateBinding MenuItems}" Margin="0 10 0 0"/>
+                                        <ContentPresenter x:Name="PaneHeaderPresenter" Grid.Row="1" Height="48" VerticalAlignment="Bottom" Content="{TemplateBinding PaneHeader}"/>
+                                        <ContentPresenter x:Name="PaneCustomContentPresenter" Grid.Row="2" Content="{TemplateBinding PaneCustomContent}"/>
+                                        <controls:NavigationViewList x:Name="MenuItems" Grid.Row="3" ItemsSource="{TemplateBinding MenuItems}" Margin="0, 5, 0, 0"/>
                                         <controls:NavigationViewList x:Name="FooterItems" Grid.Row="5" ItemsSource="{TemplateBinding FooterItems}"/>
                                     </Grid>
                                 </controls:SplitView.Pane>
-                                <Grid x:Name="ContentGrid" Margin="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+
+                                <Grid x:Name="ContentGrid">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="18" x:Name="EmptyRowDefinition"/>
-                                        <!--idk-->
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <ContentPresenter Grid.Row="1" Focusable="False" Content="{TemplateBinding Header}"/>
-                                    <ContentPresenter Grid.Row="2" Focusable="False" Content="{TemplateBinding Content}"/>
+                                    <ContentPresenter x:Name="HeaderPresenter" Grid.Row="0" Focusable="False" Content="{TemplateBinding Header}"/>
+                                    <ContentPresenter x:Name="ContentPresenter" Grid.Row="1" Focusable="False" Content="{TemplateBinding Content}"/>
                                 </Grid>
                             </controls:SplitView>
-                            <Grid x:Name="NavButtonsGrid" VerticalAlignment="Top">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Row="1" x:Name="ButtonsPanel" Orientation="Horizontal">
-                                    <Button x:Name="BackButton" Style="{StaticResource NavigationBackButtonStyle}" Visibility="{Binding TemplateSettings.BackButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}" IsEnabled="{TemplateBinding IsBackButtonEnabled}"/>
-                                    <Button x:Name="PaneToggleButton" Style="{StaticResource PaneToggleButtonStyle}" Visibility="{Binding TemplateSettings.PaneToggleButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                </StackPanel>
-                                <Rectangle Grid.ColumnSpan="2" x:Name="TitleBarDrawableRectangle" VerticalAlignment="Top" MinHeight="32" Fill="{DynamicResource SystemControlTransparentBrush}" Visibility="Collapsed"/>
-                            </Grid>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -998,15 +1103,14 @@
                                 <Condition Property="IsActingAsTitleBar" Value="False"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PaneGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                            <Setter TargetName="TitleBarDrawableRectangle" Property="Visibility" Value="Hidden"/>
+                            <Setter TargetName="ContentGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter TargetName="ButtonsPanel" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </MultiTrigger>
                         <MultiTrigger >
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsTitleBarPaddingEnabled" Value="False"/>
                                 <Condition Property="IsActingAsTitleBar" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="TitleBarDrawableRectangle" Property="Grid.Row" Value="1"/>
-                            <Setter TargetName="TitleBarDrawableRectangle" Property="Grid.Column" Value="1"/>
                             <Setter TargetName="TitleBarDrawableRectangle" Property="Visibility" Value="Visible"/>
                             <Setter TargetName="NavButtonsGrid" Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
                         </MultiTrigger>
@@ -1016,11 +1120,19 @@
                                 <Condition Property="IsActingAsTitleBar" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PaneGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter TargetName="ContentGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter TargetName="ButtonsPanel" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                             <Setter TargetName="TitleBarDrawableRectangle" Property="Visibility" Value="Visible"/>
                             <Setter TargetName="NavButtonsGrid" Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
                         </MultiTrigger>
                         <Trigger Property="IsPaneOpen" Value="True">
                             <Setter TargetName="PaneGrid" Property="Width" Value="{Binding OpenPaneLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="PaneHeader" Value="{x:Null}">
+                            <Setter TargetName="PaneHeaderPresenter" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="PaneCustomContent" Value="{x:Null}">
+                            <Setter TargetName="PaneCustomContentPresenter" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1082,6 +1194,84 @@
         </Setter>
     </Style>
 
+    <!--#endregion-->
+    
+    <!--#region 'MSB.UI.Controls.MessageDialog'-->
+
+    <Style TargetType="controls:MessageDialog">
+        <Setter Property="Background" Value="{DynamicResource MessageDialogBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource MessageDialogForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:MessageDialog">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="76px"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Margin="20, 32, 20, 10">
+                            <TextBlock x:Name="CaptionTextBlock" TextTrimming="CharacterEllipsis" FontSize="18" FontWeight="SemiBold" Margin="0, 0, 0, 10"
+                                       Text="{TemplateBinding Caption}"/>
+                            <TextBlock x:Name="ContentTextBlock" TextWrapping="Wrap" FontSize="14" Margin="0, 0, 0, 10"
+                                       Text="{TemplateBinding Content}"/>
+                            <ContentPresenter x:Name="CustomContentPresenter" Content="{TemplateBinding CustomContent}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Margin="20, 0" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                            <Button x:Name="BtnOK" IsDefault="True" Style="{StaticResource MessageDialogButtonStyle}"
+                                    Content="OK"/>
+                            <Button x:Name="BtnYes" Style="{StaticResource MessageDialogButtonStyle}" Visibility="Collapsed"
+                                    Content="Yes"/>
+                            <Button x:Name="BtnNo" Style="{StaticResource MessageDialogButtonStyle}" Visibility="Collapsed"
+                                    Content="No"/>
+                            <Button x:Name="BtnCancel" Style="{StaticResource MessageDialogButtonStyle}" Visibility="Collapsed"
+                                    Content="Cancel"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Caption" Value="">
+                            <Setter TargetName="CaptionTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Content" Value="">
+                            <Setter TargetName="ContentTextBlock" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="CustomContent" Value="{x:Null}">
+                            <Setter TargetName="CustomContentPresenter" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Buttons" Value="OKCancel">
+                            <Setter TargetName="BtnOK" Property="Margin" Value="0, 0, 15, 0"/>
+                            <Setter TargetName="BtnCancel" Property="Margin" Value="15, 0, 0, 0"/>
+                            
+                            <Setter TargetName="BtnCancel" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="Buttons" Value="YesNoCancel">
+                            <Setter TargetName="BtnOK" Property="Visibility" Value="Collapsed"/>
+                            
+                            <Setter TargetName="BtnNo" Property="Margin" Value="30, 0"/>
+                            
+                            <Setter TargetName="BtnYes" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="BtnNo" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="BtnCancel" Property="Visibility" Value="Visible"/>
+
+                            <Setter TargetName="BtnCancel" Property="IsDefault" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="Buttons" Value="YesNo">
+                            <Setter TargetName="BtnOK" Property="Visibility" Value="Collapsed"/>
+                            
+                            <Setter TargetName="BtnYes" Property="Margin" Value="0, 0, 15, 0"/>
+                            <Setter TargetName="BtnNo" Property="Margin" Value="15, 0, 0, 0"/>
+                            
+                            <Setter TargetName="BtnYes" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="BtnNo" Property="Visibility" Value="Visible"/>
+
+                            <Setter TargetName="BtnYes" Property="IsDefault" Value="True"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!--#endregion-->
     
 </ResourceDictionary>
