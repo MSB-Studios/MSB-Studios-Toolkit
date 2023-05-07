@@ -1016,8 +1016,6 @@
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <Border.Resources>
                             <Storyboard x:Key="CompactStoryboard">
-                                <animations:GridLengthAnimation BeginTime="0:0:0" Storyboard.TargetName="EmptyRowDefinition" Storyboard.TargetProperty="Height"
-                                                                To="0"/>
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SplitView" Storyboard.TargetProperty="DisplayMode">
                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static controls:SplitViewDisplayMode.CompactOverlay}"/>
                                 </ObjectAnimationUsingKeyFrames>
@@ -1032,8 +1030,6 @@
                                 </ThicknessAnimationUsingKeyFrames>
                             </Storyboard>
                             <Storyboard x:Key="ExpandedStoryboard">
-                                <animations:GridLengthAnimation BeginTime="0:0:0" Storyboard.TargetName="EmptyRowDefinition" Storyboard.TargetProperty="Height"
-                                                                To="0"/>
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SplitView" Storyboard.TargetProperty="DisplayMode">
                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static controls:SplitViewDisplayMode.CompactInline}"/>
                                 </ObjectAnimationUsingKeyFrames>
@@ -1060,49 +1056,44 @@
                         </VisualStateManager.VisualStateGroups>
 
                         <Grid >
-                            <controls:SplitView x:Name="SplitView" Background="{TemplateBinding Background}" CompactPaneLength="{TemplateBinding CompactPaneLength}" OpenPaneLength="{TemplateBinding OpenPaneLength}" IsPaneOpen="{Binding IsPaneOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+                            <Grid x:Name="NavButtonsGrid" VerticalAlignment="Top" Panel.ZIndex="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Rectangle Grid.ColumnSpan="2" x:Name="TitleBarDrawableRectangle" VerticalAlignment="Top" MinHeight="32" Fill="{DynamicResource SystemControlTransparentBrush}" Visibility="Collapsed"/>
+                                <StackPanel x:Name="ButtonsPanel" Orientation="Horizontal">
+                                    <Button x:Name="BackButton" Style="{StaticResource NavigationBackButtonStyle}" Visibility="{Binding TemplateSettings.BackButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}" IsEnabled="{TemplateBinding IsBackButtonEnabled}"/>
+                                    <Button x:Name="PaneToggleButton" Style="{StaticResource PaneToggleButtonStyle}"/>
+                                </StackPanel>
+                            </Grid>
+                            <controls:SplitView x:Name="SplitView" Panel.ZIndex="0" Background="{TemplateBinding Background}" CompactPaneLength="{TemplateBinding CompactPaneLength}" OpenPaneLength="{TemplateBinding OpenPaneLength}" IsPaneOpen="{Binding IsPaneOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
                                 <controls:SplitView.Pane>
                                     <Grid x:Name="PaneGrid" HorizontalAlignment="Left" Width="{TemplateBinding CompactPaneLength}">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="{Binding ActualHeight, ElementName=ButtonsPanel, Converter={StaticResource DoubleToGridLengthConverter}}"/>
+                                            <RowDefinition MinHeight="48" Height="{Binding ActualHeight, ElementName=ButtonsPanel, Converter={StaticResource DoubleToGridLengthConverter}}"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <ContentPresenter x:Name="PaneHeaderPresenter" Grid.Row="1" Height="48" MaxHeight="48" VerticalAlignment="Bottom" Content="{TemplateBinding PaneHeader}"/>
-                                        <ContentPresenter Grid.Row="2" Content="{TemplateBinding PaneCustomContent}"/>
-                                        <controls:NavigationViewList x:Name="MenuItems" Grid.Row="3" ItemsSource="{TemplateBinding MenuItems}" Margin="0 10 0 0"/>
+                                        <ContentPresenter x:Name="PaneHeaderPresenter" Grid.Row="1" Height="48" VerticalAlignment="Bottom" Content="{TemplateBinding PaneHeader}"/>
+                                        <ContentPresenter x:Name="PaneCustomContentPresenter" Grid.Row="2" Content="{TemplateBinding PaneCustomContent}"/>
+                                        <controls:NavigationViewList x:Name="MenuItems" Grid.Row="3" ItemsSource="{TemplateBinding MenuItems}" Margin="0, 5, 0, 0"/>
                                         <controls:NavigationViewList x:Name="FooterItems" Grid.Row="5" ItemsSource="{TemplateBinding FooterItems}"/>
                                     </Grid>
                                 </controls:SplitView.Pane>
-                                <Grid x:Name="ContentGrid" Margin="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+
+                                <Grid x:Name="ContentGrid">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="18" x:Name="EmptyRowDefinition"/>
-                                        <!--idk-->
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <ContentPresenter Grid.Row="1" Focusable="False" Content="{TemplateBinding Header}"/>
-                                    <ContentPresenter Grid.Row="2" Focusable="False" Content="{TemplateBinding Content}"/>
+                                    <ContentPresenter x:Name="HeaderPresenter" Grid.Row="0" Focusable="False" Content="{TemplateBinding Header}"/>
+                                    <ContentPresenter x:Name="ContentPresenter" Grid.Row="1" Focusable="False" Content="{TemplateBinding Content}"/>
                                 </Grid>
                             </controls:SplitView>
-                            <Grid x:Name="NavButtonsGrid" VerticalAlignment="Top">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Row="1" x:Name="ButtonsPanel" Orientation="Horizontal">
-                                    <Button x:Name="BackButton" Style="{StaticResource NavigationBackButtonStyle}" Visibility="{Binding TemplateSettings.BackButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}" IsEnabled="{TemplateBinding IsBackButtonEnabled}"/>
-                                    <Button x:Name="PaneToggleButton" Style="{StaticResource PaneToggleButtonStyle}" Visibility="{Binding TemplateSettings.PaneToggleButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                </StackPanel>
-                                <Rectangle Grid.ColumnSpan="2" x:Name="TitleBarDrawableRectangle" VerticalAlignment="Top" MinHeight="32" Fill="{DynamicResource SystemControlTransparentBrush}" Visibility="Collapsed"/>
-                            </Grid>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -1112,15 +1103,14 @@
                                 <Condition Property="IsActingAsTitleBar" Value="False"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PaneGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                            <Setter TargetName="TitleBarDrawableRectangle" Property="Visibility" Value="Hidden"/>
+                            <Setter TargetName="ContentGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter TargetName="ButtonsPanel" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </MultiTrigger>
                         <MultiTrigger >
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsTitleBarPaddingEnabled" Value="False"/>
                                 <Condition Property="IsActingAsTitleBar" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="TitleBarDrawableRectangle" Property="Grid.Row" Value="1"/>
-                            <Setter TargetName="TitleBarDrawableRectangle" Property="Grid.Column" Value="1"/>
                             <Setter TargetName="TitleBarDrawableRectangle" Property="Visibility" Value="Visible"/>
                             <Setter TargetName="NavButtonsGrid" Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
                         </MultiTrigger>
@@ -1130,11 +1120,19 @@
                                 <Condition Property="IsActingAsTitleBar" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PaneGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter TargetName="ContentGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter TargetName="ButtonsPanel" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                             <Setter TargetName="TitleBarDrawableRectangle" Property="Visibility" Value="Visible"/>
                             <Setter TargetName="NavButtonsGrid" Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
                         </MultiTrigger>
                         <Trigger Property="IsPaneOpen" Value="True">
                             <Setter TargetName="PaneGrid" Property="Width" Value="{Binding OpenPaneLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="PaneHeader" Value="{x:Null}">
+                            <Setter TargetName="PaneHeaderPresenter" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="PaneCustomContent" Value="{x:Null}">
+                            <Setter TargetName="PaneCustomContentPresenter" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -7,7 +7,7 @@
 		<RootNamespace>MSB</RootNamespace>
 		<LangVersion>latest</LangVersion>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>1.4.0</Version>
+		<Version>1.4.1</Version>
 		<Company>MSB Studios</Company>
 		<Authors>MSB Studios</Authors>
 		<PackageTags>Toolkit; Controls; .NET; WPF</PackageTags>

@@ -148,22 +148,12 @@ namespace MSB.UI.Controls
 
         /// <summary>
         /// Gets or sets a value that indicates whether the back button is shown.
-        /// <para>The default is **Visible**.</para>
+        /// <para>The default is **true**.</para>
         /// </summary>
-        public Visibility BackButtonVisibility
+        public bool IsBackButtonVisible
         {
-            get => (Visibility)GetValue(BackButtonVisibilityProperty);
-            set => SetValue(BackButtonVisibilityProperty, value);
-        }
-
-        /// <summary>
-        /// Gets or sets a value that indicates whether the menu toggle button is shown.
-        /// <para>The default is **Visible**.</para>
-        /// </summary>
-        public Visibility PaneToggleButtonVisibility
-        {
-            get => (Visibility)GetValue(PaneToggleButtonVisibilityProperty);
-            set => SetValue(PaneToggleButtonVisibilityProperty, value);
+            get => (bool)GetValue(IsBackButtonVisibleProperty);
+            set => SetValue(IsBackButtonVisibleProperty, value);
         }
 
         /// <summary>
@@ -282,16 +272,10 @@ namespace MSB.UI.Controls
                 DependencyProperty.Register(nameof(IsBackButtonEnabled), typeof(bool), typeof(NavigationView), new PropertyMetadata(false));
 
         /// <summary>
-        /// Identifies the BackButtonVisibility dependency property.
+        /// Identifies the IsBackButtonVisible dependency property.
         /// </summary>
-        public static readonly DependencyProperty BackButtonVisibilityProperty =
-                DependencyProperty.Register(nameof(BackButtonVisibility), typeof(Visibility), typeof(NavigationView), new PropertyMetadata(Visibility.Visible));
-
-        /// <summary>
-        /// Identifies the PaneToggleButtonVisibility dependency property.
-        /// </summary>
-        public static readonly DependencyProperty PaneToggleButtonVisibilityProperty =
-                DependencyProperty.Register(nameof(PaneToggleButtonVisibility), typeof(Visibility), typeof(NavigationView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty IsBackButtonVisibleProperty =
+                DependencyProperty.Register(nameof(IsBackButtonVisible), typeof(bool), typeof(NavigationView), new PropertyMetadata(true, IsBackButtonVisibleChanged_Callback));
 
         /// <summary>
         /// Identifies the DisplayMode dependency property.
@@ -393,6 +377,12 @@ namespace MSB.UI.Controls
             }
         }
 
+        private static void IsBackButtonVisibleChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue != e.NewValue && d is NavigationView nv)
+                nv.TemplateSettings?.Update();
+        }
+
         private static void DisplayModeChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.OldValue != e.NewValue && d is NavigationView navView)
@@ -482,6 +472,8 @@ namespace MSB.UI.Controls
         private void UpdateVisualState()
         {
             VisualStateManager.GoToState(this, this.DisplayMode.ToString(), false);
+
+            this.TemplateSettings?.Update();
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
