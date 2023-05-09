@@ -24,13 +24,20 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="Icon.png" Pack="True" PackagePath="\"/>
-		<None Include="LICENSE.txt" Pack="True" PackagePath="\"/>
-		<None Include="README.md" Pack="True" PackagePath="\"/>
+		<None Include="Icon.png" Pack="True" PackagePath="\" />
+		<None Include="LICENSE.txt" Pack="True" PackagePath="\" />
+		<None Include="README.md" Pack="True" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Resource Include="Assets\SegMDL2.ttf"/>
+		<Resource Include="Assets\SegMDL2.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Assets\Images\MessageDialog.png" />
+		<None Include="Assets\Images\AppBarButton.png" />
+		<None Include="Assets\Images\FontIcon.png" />
+		<None Include="Assets\Images\NavigationViewItem.png" />
 	</ItemGroup>
 
 </Project>

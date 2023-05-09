@@ -841,7 +841,7 @@
         <Setter Property="Background" Value="{DynamicResource NavigationViewItemBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource NavigationViewItemForeground}"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="4 0"/>
+        <Setter Property="Padding" Value="10, 0"/>
         <Setter Property="Margin" Value="4 2"/>
         <Setter Property="MinHeight" Value="40"/>
         <Setter Property="Height" Value="40"/>
@@ -1146,42 +1146,42 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="Padding" Value="10, 0"/>
         <Setter Property="MinHeight" Value="36"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:AppBarButton">
-                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" Padding="0, 10" SnapsToDevicePixels="true">
                         <Grid >
                             <Grid.RowDefinitions>
-                                <RowDefinition />
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <ContentPresenter Grid.Row="0" x:Name="IconPresenter" Content="{TemplateBinding Icon}" Margin="{TemplateBinding IconPadding}"/>
-                            <ContentPresenter Grid.Row="1" x:Name="Content" Focusable="False" Content="{TemplateBinding Label}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter Grid.Row="1" x:Name="ContentPresenter" Focusable="False" Content="{TemplateBinding Label}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
-                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
                             <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
-                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
                             <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="LayoutRoot" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}"/>
-                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
                             <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
                         </Trigger>
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="Label" Value="">
-                            <Setter TargetName="Content" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

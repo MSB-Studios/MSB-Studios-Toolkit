@@ -6,7 +6,7 @@ using System.Windows.Shapes;
 namespace MSB.UI
 {
     /// <summary>
-    /// It represents a window with new functions, such as the ability to hide the icon,
+    /// Represents a window with new functions, such as the ability to hide the icon,
     /// the title or cover the title bar with its contents.
     /// </summary>
     public sealed class ModernWindow : Window
