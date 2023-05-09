@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSB.UI (Universal Windows)"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSB.UI (Windows Presentation)", "MSB.UI (Windows Presentation)\MSB.UI (Windows Presentation).csproj", "{35DE2225-F142-4918-8168-5FB17AFE1871}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp1", "..\WpfApp1\WpfApp1.csproj", "{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{35DE2225-F142-4918-8168-5FB17AFE1871}.Release|x64.Build.0 = Release|Any CPU
 		{35DE2225-F142-4918-8168-5FB17AFE1871}.Release|x86.ActiveCfg = Release|Any CPU
 		{35DE2225-F142-4918-8168-5FB17AFE1871}.Release|x86.Build.0 = Release|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Debug|x64.Build.0 = Debug|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Debug|x86.Build.0 = Debug|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Release|x64.ActiveCfg = Release|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Release|x64.Build.0 = Release|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Release|x86.ActiveCfg = Release|Any CPU
+		{0DD6B144-229B-4BF3-80F6-F5B5D58F1C61}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
