@@ -34,10 +34,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="Assets\Images\MessageDialog.png" />
-		<None Include="Assets\Images\AppBarButton.png" />
-		<None Include="Assets\Images\FontIcon.png" />
-		<None Include="Assets\Images\NavigationViewItem.png" />
+		<None Include="Assets\Images\MessageDialog.png" Pack="True" PackagePath="\Assets\Images\"/>
+		<None Include="Assets\Images\AppBarButton.png" Pack="True" PackagePath="\Assets\Images\"/>
+		<None Include="Assets\Images\FontIcon.png" Pack="True" PackagePath="\Assets\Images\"/>
+		<None Include="Assets\Images\NavigationViewItem.png" Pack="True" PackagePath="\Assets\Images\"/>
 	</ItemGroup>
 
 </Project>

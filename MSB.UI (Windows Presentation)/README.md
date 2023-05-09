@@ -1,34 +1,15 @@
-﻿<h1 style="font-weight: bolder; text-align: center;">
-    MSB STUDIOS
-</h1>
-<div align="center">
-    <img src="/Icon.png" alt="Logo de mi proyecto" style="width: 256px; height: 256px; margin: 50px 0; border-radius: 15%;"/>
-    <h2 style="text-align: center; margin-bottom: 25px;">
-        MSB.UI (Windows Presentation Foundation)
-    </h2>
-    <p style="text-align:justify; font-size: 18px;">
-        Welcome to the <strong>MSB.UI-WPF</strong> controls library, a collection of custom controls designed to enhance the user experience of your WPF applications. This library contains controls for a variety of use cases, including:
-    </p>
-</div>
+﻿# MSB STUDIOS
+Welcome to the **MSB.UI-WPF** controls library, a collection of custom controls designed to enhance the user experience of your WPF applications. This library contains controls for a variety of use cases, including:
 
-- **ModernWindow:** An ordinary window at first glance, but it brings new functions, such as the possibility of hiding the icon, the title or extending the window content to the title bar. :O
-- **SplitView:** It provides an easy way to implement the Master-Detail pattern in Win32 applications by splitting the user interface into two panes: one for the main content and one for navigation and configuration.
-- **NavigationView:** This control provides an easy way to implement navigation in the application and is often used in combination with the Master-Detail pattern.
-                      On the left side you can add your navigation options, navigation buttons and configuration areas and in the main area the content you want to navigate to.  
-                      The control also adapts automatically to the various sizes of the containing window, you can modify the breakpoints using the `CompactModeThresholdWidth` and `ExpandedModeThresholdWidth` properties.
-- **NavigationViewItem:** Represents an item in the list of navigation options in the `NavigationView` control.  
-                          Nesting has not been implemented at this time. :'(
-![NavigationViewItem sample](/Assets/Images/NavigationViewItem.png){ width = 540 }
-- **NavigationViewList:** A container used in the `NavigationView` control to group and display the Menu and Footer items..
-- **PathIcon:** Based on the already known `Path` control, but inherits the foreground of the parent element, giving a better result.
-- **FontIcon:** Provides a fairly quick and easy way to display icons in our user interface using icon fonts.  
-                At the moment you can only use the elements included in the `Segoe MDL2 Assets` font.  
-![FontIcon sample](/Assets/Images/FontIcon.png){ width = 440 }
-- **AppBarButton:** A variant of the classic button to allow displaying an icon and a label, or just the icon.  
-![AppBarButton sample](/Assets/Images/AppBarButton.png){ width = 540 }
-- **MessageDialog:** Custom controls for displaying data in an elegant and appealing way, such as charts, tables, and heat maps.  
-![MessageDialog sample](/Assets/Images/MessageDialog.png){ width = 540 }
-
+- **ModernWindow**
+- **SplitView**
+- **NavigationView**
+- **NavigationViewItem**
+- **NavigationViewList**
+- **PathIcon**
+- **FontIcon**
+- **AppBarButton**
+- **MessageDialog**
 ## Installation
 
 To install the library simply download it from [NuGet](https://www.nuget.org/) and add the reference to your project.  
