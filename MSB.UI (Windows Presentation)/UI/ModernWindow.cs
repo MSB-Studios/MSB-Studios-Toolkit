@@ -1,7 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows.Shapes;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
-using System.Windows.Shapes;
 
 namespace MSB.UI
 {
@@ -20,6 +20,28 @@ namespace MSB.UI
         }
 
         #region Properties
+
+        /// <summary>
+        /// Gets the currently activated window.
+        /// </summary>
+        public static Window Current
+        {
+            get
+            {
+                Window activeWindow = null;
+
+                foreach(Window window in Application.Current.Windows)
+                {
+                    if (window.IsActive)
+                    {
+                        activeWindow = window;
+                        break;
+                    }
+                }
+
+                return activeWindow;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a value that indicates whether the contents of the window

@@ -1021,7 +1021,7 @@
                                     <DiscreteInt32KeyFrame KeyTime="0:0:0" Value="0"/>
                                 </Int32AnimationUsingKeyFrames>
                                 <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PaneHeaderPresenter" Storyboard.TargetProperty="Margin">
-                                    <DiscreteThicknessKeyFrame KeyTime="0:0:0" Value="48 0 0 0"/>
+                                    <DiscreteThicknessKeyFrame KeyTime="0:0:0" Value="48, 0, 0, 0"/>
                                 </ThicknessAnimationUsingKeyFrames>
                             </Storyboard>
                             <Storyboard x:Key="ExpandedStoryboard">
@@ -1035,7 +1035,7 @@
                                     <DiscreteInt32KeyFrame KeyTime="0:0:0" Value="0"/>
                                 </Int32AnimationUsingKeyFrames>
                                 <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PaneHeaderPresenter" Storyboard.TargetProperty="Margin">
-                                    <DiscreteThicknessKeyFrame KeyTime="0:0:0" Value="48 0 0 0"/>
+                                    <DiscreteThicknessKeyFrame KeyTime="0:0:0" Value="48, 0, 0, 0"/>
                                 </ThicknessAnimationUsingKeyFrames>
                             </Storyboard>
                         </Border.Resources>
@@ -1066,7 +1066,7 @@
                                 <controls:SplitView.Pane>
                                     <Grid x:Name="PaneGrid" HorizontalAlignment="Left" Width="{TemplateBinding CompactPaneLength}">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition MinHeight="48" Height="{Binding ActualHeight, ElementName=ButtonsPanel, Converter={StaticResource DoubleToGridLengthConverter}}"/>
+                                            <RowDefinition MinHeight="48" Height="{Binding TemplateSettings.ButtonsPanelGridLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
@@ -1151,7 +1151,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:AppBarButton">
-                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" Padding="0, 10" SnapsToDevicePixels="true">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" Padding="0, 10" SnapsToDevicePixels="true">
                         <Grid >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
