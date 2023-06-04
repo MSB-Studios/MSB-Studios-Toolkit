@@ -9,7 +9,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Version>1.4.9</Version>
+		<Version>1.4.10</Version>
 		<Company>MSB Studios</Company>
 		<Authors>MSB Studios</Authors>
 		<PackageTags>Toolkit; Controls; .NET; WPF</PackageTags>

@@ -1092,7 +1092,11 @@
     <SolidColorBrush x:Key="TitleBarButtonForegroundDisabled"
                      Color="{DynamicResource ControlDisabledForeColor}"/>
 
-    <SolidColorBrush x:Key="IconElementForeground"
+    <SolidColorBrush x:Key="MessageDialogBackground"
+                     Color="White"/>
+    <SolidColorBrush x:Key="MessageDialogBorderBrush"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="MessageDialogForeground"
                      Color="Black"/>
 
     <SolidColorBrush x:Key="SplitViewBackground"
