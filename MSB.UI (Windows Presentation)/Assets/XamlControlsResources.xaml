@@ -1092,13 +1092,6 @@
     <SolidColorBrush x:Key="TitleBarButtonForegroundDisabled"
                      Color="{DynamicResource ControlDisabledForeColor}"/>
 
-    <SolidColorBrush x:Key="MessageDialogBackground"
-                     Color="White"/>
-    <SolidColorBrush x:Key="MessageDialogBorderBrush"
-                     Color="{DynamicResource ApplicationAccentColor}"/>
-    <SolidColorBrush x:Key="MessageDialogForeground"
-                     Color="Black"/>
-
     <SolidColorBrush x:Key="SplitViewBackground"
                      Color="White"/>
     <SolidColorBrush x:Key="SplitViewPaneBackground"
@@ -1306,7 +1299,9 @@
                      Color="#FFD1D1D1"/>
 
     <SolidColorBrush x:Key="MessageDialogBackground"
-                     Color="Transparent"/>
+                     Color="White"/>
+    <SolidColorBrush x:Key="MessageDialogBorderBrush"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
     <SolidColorBrush x:Key="MessageDialogForeground"
                      Color="Black"/>
 
