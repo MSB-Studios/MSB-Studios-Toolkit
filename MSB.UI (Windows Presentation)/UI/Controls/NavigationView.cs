@@ -410,18 +410,18 @@ namespace MSB.UI.Controls
                 this.menuItems.SelectionChanged -= MenuItems_SelectionChanged;
 
             if (this.footerItems != null)
-                footerItems.SelectionChanged -= FooterItems_SelectionChanged;
+                this.footerItems.SelectionChanged -= FooterItems_SelectionChanged;
 
             if (this.titleBarRectangle != null)
-            {
                 this.titleBarRectangle.MouseDown -= OnTitleBarDragging;
-                this.titleBarRectangle.PreviewMouseDown -= OnPreviewTitleBarDragging;
-            }
+
+            if (this.titleBarRectangle != null)
+                this.buttonsStackPanel.SizeChanged -= ButtonStackPanel_SizeChanged;
 
             if (this.splitView != null)
             {
-                splitView.PaneOpening -= SplitView_PaneOpening;
-                splitView.PaneClosed -= SplitView_PaneClosed;
+                this.splitView.PaneOpening -= SplitView_PaneOpening;
+                this.splitView.PaneClosed -= SplitView_PaneClosed;
             }
 
             backButton = (Button)GetTemplateChild("BackButton");
@@ -429,33 +429,32 @@ namespace MSB.UI.Controls
             titleBarRectangle = (Rectangle)GetTemplateChild("TitleBarDrawableRectangle");
             menuItems = (NavigationViewList)GetTemplateChild("MenuItems");
             footerItems = (NavigationViewList)GetTemplateChild("FooterItems");
+            buttonsStackPanel = (StackPanel)GetTemplateChild("ButtonsPanel");
             splitView = (SplitView)GetTemplateChild("RootSplitView");
 
             if (this.backButton != null)
                 this.backButton.Click += BackButton_Click;
 
             if (this.paneToggleButton != null)
-            this.paneToggleButton.Click += PaneToggleButton_Click;
+                this.paneToggleButton.Click += PaneToggleButton_Click;
 
             if (this.menuItems != null)
-            this.menuItems.SelectionChanged += MenuItems_SelectionChanged;
+                this.menuItems.SelectionChanged += MenuItems_SelectionChanged;
 
             if (this.footerItems != null)
-            this.footerItems.SelectionChanged += FooterItems_SelectionChanged;
+                this.footerItems.SelectionChanged += FooterItems_SelectionChanged;
 
             if (this.titleBarRectangle != null)
-            {
                 this.titleBarRectangle.MouseDown += OnTitleBarDragging;
-                this.titleBarRectangle.PreviewMouseDown += OnPreviewTitleBarDragging;
-            }
+
+            if (this.titleBarRectangle != null)
+                this.buttonsStackPanel.SizeChanged += ButtonStackPanel_SizeChanged;
 
             if (this.splitView != null)
             {
                 this.splitView.PaneOpening += SplitView_PaneOpening;
                 this.splitView.PaneClosed += SplitView_PaneClosed;
             }
-
-            this.TemplateSettings?.Update();
 
             UpdateVisualState();
         }
@@ -528,25 +527,16 @@ namespace MSB.UI.Controls
             SetValue(IsPaneOpenProperty, !this.IsPaneOpen);
         }
 
-        private void OnPreviewTitleBarDragging(object sender, MouseButtonEventArgs e)
+        private void ButtonStackPanel_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (this.currentWindow != null)
-                return;
-
-            foreach (Window win in Application.Current.Windows)
-            {
-                if (win.IsActive)
-                {
-                    this.currentWindow = win;
-                    return;
-                }
-            }
+            this.TemplateSettings?.SetValue(NavigationViewTemplateSettings.ButtonsPanelGridLengthProperty,
+                                            new GridLength(e.NewSize.Height));
         }
 
         private void OnTitleBarDragging(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
-                this.currentWindow?.DragMove();
+            if (e.LeftButton is MouseButtonState.Pressed)
+                Window.GetWindow(this).DragMove();
         }
 
         private void Render()
@@ -595,7 +585,7 @@ namespace MSB.UI.Controls
         NavigationViewList menuItems, footerItems;
         Button backButton, paneToggleButton;
         SplitView splitView;
-        Window currentWindow;
+        StackPanel buttonsStackPanel;
         bool isClosedByUser = false;
     }
 }

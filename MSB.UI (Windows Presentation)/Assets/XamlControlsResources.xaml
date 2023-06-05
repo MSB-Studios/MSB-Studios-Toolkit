@@ -150,7 +150,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
                         <Grid x:Name="DarkeningMask">
                             <ContentPresenter x:Name="Content" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Grid>
@@ -192,7 +192,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                            <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
                                 <ContentPresenter x:Name="Content" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Border>
                             <ControlTemplate.Triggers>
@@ -219,7 +219,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ButtonBase}">
-                            <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                            <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
                                 <Grid x:Name="DarkeningMask">
                                     <ContentPresenter x:Name="Content" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </Grid>
@@ -307,7 +307,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
+                    <Border x:Name="LayoutRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}" SnapsToDevicePixels="true">
                         <Grid x:Name="DarkeningMask">
                             <ContentPresenter x:Name="Content" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Grid>
@@ -446,7 +446,7 @@
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="Padding" Value="10, 8.5"/>
         <Setter Property="MinHeight" Value="36"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -494,7 +494,7 @@
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="Padding" Value="10, 8.5"/>
         <Setter Property="MinHeight" Value="36"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -553,7 +553,7 @@
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="10 0"/>
+        <Setter Property="Padding" Value="10, 8.5"/>
         <Setter Property="MinHeight" Value="36"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -581,6 +581,15 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+            </MultiTrigger>
+        </Style.Triggers>
     </Style>
 
     <!--Default '...PasswordBox' style-->
@@ -712,6 +721,7 @@
         <Setter Property="Background" Value="{DynamicResource ComboBoxItemBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource ComboBoxItemForeground}"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
+        <Setter Property="Margin" Value="0, 2"/>
         <Setter Property="MinHeight" Value="36"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -1082,9 +1092,6 @@
     <SolidColorBrush x:Key="TitleBarButtonForegroundDisabled"
                      Color="{DynamicResource ControlDisabledForeColor}"/>
 
-    <SolidColorBrush x:Key="IconElementForeground"
-                     Color="Black"/>
-
     <SolidColorBrush x:Key="SplitViewBackground"
                      Color="White"/>
     <SolidColorBrush x:Key="SplitViewPaneBackground"
@@ -1292,7 +1299,9 @@
                      Color="#FFD1D1D1"/>
 
     <SolidColorBrush x:Key="MessageDialogBackground"
-                     Color="Transparent"/>
+                     Color="White"/>
+    <SolidColorBrush x:Key="MessageDialogBorderBrush"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
     <SolidColorBrush x:Key="MessageDialogForeground"
                      Color="Black"/>
 

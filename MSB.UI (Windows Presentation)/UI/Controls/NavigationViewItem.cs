@@ -114,7 +114,6 @@ namespace MSB.UI.Controls
         private void UpdateVisualState(bool animate)
         {
             VisualStateManager.GoToState(this, this.IsSelected ? "NotchVisible" : "NotchCollapsed", animate);
-            VisualStateManager.GoToState(this, this.Icon != null ? "IconVisible" : "IconCollapsed", false);
         }
 
         #endregion

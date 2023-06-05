@@ -46,6 +46,14 @@ namespace MSB.UI.Controls.Primitives
             get => (Thickness)GetValue(TitleBarMarginProperty);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public GridLength ButtonsPanelGridLength
+        {
+            get => (GridLength)GetValue(ButtonsPanelGridLengthProperty);
+        }
+
         #endregion
 
         #region Dependency properties
@@ -61,6 +69,9 @@ namespace MSB.UI.Controls.Primitives
 
         internal static readonly DependencyProperty TitleBarMarginProperty =
                 DependencyProperty.Register(nameof(TitleBarMargin), typeof(Thickness), typeof(NavigationViewTemplateSettings), new PropertyMetadata(new Thickness(0, 32, 0, 0)));
+
+        internal static readonly DependencyProperty ButtonsPanelGridLengthProperty =
+                DependencyProperty.Register(nameof(ButtonsPanelGridLength), typeof(GridLength), typeof(NavigationViewTemplateSettings), new PropertyMetadata(new GridLength(48d)));
 
         #endregion
 

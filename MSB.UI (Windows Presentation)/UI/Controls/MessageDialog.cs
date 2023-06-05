@@ -1,12 +1,11 @@
-﻿using System.Windows.Controls;
-using System.Windows;
+﻿using System.Windows;
 
 namespace MSB.UI.Controls
 {
     /// <summary>
     /// Represents a dialog box that displays a message or content and returns a value.
     /// </summary>
-    public sealed class MessageDialog : Control
+    public sealed class MessageDialog : FrameworkElement
     {
         /// <summary>
         /// Initializes a new instance of the MessageDialog class.
@@ -86,66 +85,8 @@ namespace MSB.UI.Controls
 
         #region Methods
 
-        /// <inheritdoc/>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            if (btnOK is not null)
-                btnOK.Click -= OnOKButtonClick;
-            if (btnYes is not null)
-                btnYes.Click -= OnYesButtonClick;
-            if (btnNo is not null)
-                btnNo.Click -= OnNoButtonClick;
-            if (btnCancel is not null)
-                btnCancel.Click -= OnCancelButtonClick;
-
-            btnOK = (Button)GetTemplateChild("BtnOK");
-            btnYes = (Button)GetTemplateChild("BtnYes");
-            btnNo = (Button)GetTemplateChild("BtnNo");
-            btnCancel = (Button)GetTemplateChild("BtnCancel");
-
-            if (btnOK is not null)
-                btnOK.Click += OnOKButtonClick;
-            if (btnYes is not null)
-                btnYes.Click += OnYesButtonClick;
-            if (btnNo is not null)
-                btnNo.Click += OnNoButtonClick;
-            if (btnCancel is not null)
-                btnCancel.Click += OnCancelButtonClick;
-
-        }
-
-        private void OnOKButtonClick(object sender, RoutedEventArgs e)
-        {
-            result = MessageDialogResult.OK;
-
-            hostWindow.DialogResult = true;
-        }
-
-        private void OnYesButtonClick(object sender, RoutedEventArgs e)
-        {
-            result = MessageDialogResult.Yes;
-
-            hostWindow.DialogResult = true;
-        }
-
-        private void OnNoButtonClick(object sender, RoutedEventArgs e)
-        {
-            result = MessageDialogResult.No;
-
-            hostWindow.DialogResult = true;
-        }
-
-        private void OnCancelButtonClick(object sender, RoutedEventArgs e)
-        {
-            result = MessageDialogResult.Cancel;
-
-            hostWindow.DialogResult = true;
-        }
-
         /// <summary>
-        /// Displays the dialog that has a message and that returns a result.
+        /// Displays the dialog that has a message and that returns a Result.
         /// </summary>
         /// <returns>A <see cref="MessageDialogResult"/> value that specifies which message dialog button
         /// is clicked by the user.</returns>
@@ -154,7 +95,7 @@ namespace MSB.UI.Controls
             hostWindow = new()
             {
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
-                Content = this,
+                DataContext = this
             };
 
             foreach (Window window in Application.Current.Windows)
@@ -167,13 +108,12 @@ namespace MSB.UI.Controls
             }
 
             hostWindow.ShowDialog();
-            return result;
+
+            return hostWindow.Result;
         }
 
 #endregion
 
-        Button btnOK, btnCancel, btnYes, btnNo;
         DialogWindow hostWindow = null;
-        MessageDialogResult result = MessageDialogResult.None;
     }
 }
